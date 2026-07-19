@@ -886,7 +886,7 @@ export default function LandingPage({ onGetStarted, onSignIn, onLaunchDemo, onSa
           transition={{ duration: 0.8, ease: "easeOut", delay: 0.4 }}
           className="w-full max-w-5xl mt-14 md:mt-18"
         >
-          <div className="w-full bg-violet-950 rounded-xl border border-violet-900/60 shadow-xl overflow-hidden text-left flex flex-col h-[540px] sm:h-[600px] md:h-[600px] lg:h-[580px]">
+          <div className="w-full bg-violet-950 rounded-xl border border-violet-900/60 shadow-xl overflow-hidden text-left flex flex-col h-auto lg:h-[580px]">
             
             {/* Top Chrome Window Header */}
             <div className="bg-slate-50 border-b border-slate-100 px-4 py-3 flex items-center justify-between relative">
@@ -951,7 +951,7 @@ export default function LandingPage({ onGetStarted, onSignIn, onLaunchDemo, onSa
             </div>
 
             {/* Simulated Live Product Dashboard layout */}
-            <div className="flex-1 p-6 md:p-8 bg-slate-50 relative overflow-hidden">
+            <div className="flex-1 p-4 sm:p-6 md:p-8 bg-slate-50 relative overflow-hidden lg:overflow-y-auto">
               <AnimatePresence mode="wait">
                 {mockupTab === 'payroll' && (
                   <motion.div
@@ -1798,20 +1798,20 @@ export default function LandingPage({ onGetStarted, onSignIn, onLaunchDemo, onSa
                             { title: "Department Head", grossTier: "Executive Base", cnpsTier: "Statutory Match (Capped)", irppTier: "Surtax Rate Approved", netTier: "Tier C Verified" }
                           ].map((item, idx) => {
                             return (
-                              <div key={idx} className="bg-violet-900/45 p-2.5 rounded-xl flex justify-between items-center text-xs border border-violet-800/40">
-                                <div>
+                              <div key={idx} className="bg-violet-900/45 p-3 rounded-xl flex flex-col sm:flex-row sm:items-center justify-between gap-3 border border-violet-800/40 text-xs">
+                                <div className="min-w-0">
                                   <span className="font-bold text-white block">{item.title}</span>
-                                  <div className="flex items-center gap-2 text-[10px] text-violet-300 mt-0.5">
+                                  <div className="flex flex-wrap items-center gap-x-2 gap-y-1 text-[10px] text-violet-300 mt-1">
                                     <span>Gross: {item.grossTier}</span>
-                                    <span>•</span>
+                                    <span className="hidden sm:inline text-violet-500">•</span>
                                     <span>CNPS: {item.cnpsTier}</span>
-                                    <span>•</span>
+                                    <span className="hidden sm:inline text-violet-500">•</span>
                                     <span>IRPP: {item.irppTier}</span>
                                   </div>
                                 </div>
-                                <div className="text-right">
-                                  <span className="text-[10px] text-violet-300 font-medium block">Net Disbursed</span>
-                                  <span className="font-mono font-extrabold text-violet-200 bg-violet-850 px-2 py-0.5 rounded border border-violet-700/60">{item.netTier}</span>
+                                <div className="text-left sm:text-right flex items-center justify-between sm:block pt-2 sm:pt-0 border-t border-violet-900/40 sm:border-t-0 w-full sm:w-auto">
+                                  <span className="text-[10px] text-violet-400 font-medium sm:block">Net Disbursed</span>
+                                  <span className="font-mono font-extrabold text-violet-200 bg-violet-950 px-2 py-0.5 rounded border border-violet-750/60 inline-block">{item.netTier}</span>
                                 </div>
                               </div>
                             );
@@ -1831,12 +1831,12 @@ export default function LandingPage({ onGetStarted, onSignIn, onLaunchDemo, onSa
                           <span className="text-[9px] font-mono text-violet-300">Contracts active</span>
                         </div>
                         <div className="overflow-x-auto">
-                          <div className="space-y-2 min-w-[340px] sm:min-w-0">
+                          <div className="space-y-2">
                             {[
                               { name: "Marie-Louise Ndongo", role: "Sales Specialist", type: "CDI", start: "Recent Cycle", pct: "Full Time" },
                               { name: "Guy-Alain Bedimo", role: "Network Architect", type: "CDD (Temps)", start: "Active Cycle", pct: "Part Time" }
                             ].map((emp, i) => (
-                              <div key={i} className="flex items-center justify-between p-3 bg-violet-900/45 hover:bg-violet-900/60 rounded border border-violet-800/40 text-xs">
+                              <div key={i} className="flex flex-col sm:flex-row sm:items-center justify-between p-3 bg-violet-900/45 hover:bg-violet-900/60 rounded border border-violet-800/40 text-xs gap-3">
                                 <div className="flex items-center gap-2.5">
                                   <div className="h-7 w-7 rounded-full bg-violet-850 text-violet-200 border border-violet-700/30 flex items-center justify-center font-bold text-xs shrink-0">{emp.name[0]}</div>
                                   <div>
@@ -1844,7 +1844,7 @@ export default function LandingPage({ onGetStarted, onSignIn, onLaunchDemo, onSa
                                     <span className="text-[10px] text-violet-300">{emp.role} • Joined {emp.start}</span>
                                   </div>
                                 </div>
-                                <div className="flex items-center gap-3 shrink-0">
+                                <div className="flex items-center justify-between sm:justify-end gap-3 w-full sm:w-auto pt-2 sm:pt-0 border-t border-violet-800/35 sm:border-t-0 shrink-0">
                                   <span className="text-[10px] bg-violet-100 text-violet-800 border border-violet-300 px-2 py-0.5 rounded font-bold">{emp.type}</span>
                                   <span className="font-mono font-bold text-violet-200">{emp.pct}</span>
                                 </div>
@@ -1863,21 +1863,31 @@ export default function LandingPage({ onGetStarted, onSignIn, onLaunchDemo, onSa
                           <span className="text-[9px] text-violet-300 font-bold bg-violet-900/50 px-2 py-0.5 rounded font-mono border border-violet-850/50">ORANGE MONEY / MOMO SYNC</span>
                         </div>
                         <div className="overflow-x-auto">
-                          <div className="space-y-2 bg-violet-900/45 p-3.5 rounded-xl border border-violet-800/40 text-xs min-w-[450px] sm:min-w-0">
-                            <div className="flex justify-between items-center border-b border-violet-800/50 pb-1.5 font-bold text-[10px] text-violet-300 uppercase tracking-wider">
-                              <span>Accrued Period</span>
-                              <span>Eligible Advance</span>
-                              <span>Disbursed</span>
+                          <div className="space-y-2 bg-violet-900/45 p-3 sm:p-4 rounded-xl border border-violet-800/40 text-xs">
+                            {/* Header row: hidden on mobile, visible on sm and up */}
+                            <div className="hidden sm:flex justify-between items-center border-b border-violet-800/50 pb-1.5 font-bold text-[10px] text-violet-300 uppercase tracking-wider">
+                              <span className="w-1/3">Accrued Period</span>
+                              <span className="w-1/3 text-center">Eligible Advance</span>
+                              <span className="w-1/3 text-right">Disbursed</span>
                             </div>
                             {[
                               { period: "Initial Cycle Accrued", eligible: "Standard Limit Authorized", disbursed: "Instant Mobile Pay" },
                               { period: "Mid Cycle Accrued", eligible: "Elevated Limit Authorized", disbursed: "Instant Mobile Pay" },
                               { period: "End Cycle Accrued", eligible: "Maximum Limit Authorized", disbursed: "Instant Mobile Pay" }
                             ].map((item, idx) => (
-                              <div key={idx} className="flex justify-between items-center py-1 text-violet-100">
-                                <span className="font-medium text-[11px]">{item.period}</span>
-                                <span className="font-mono font-bold text-violet-100 text-[11px] bg-violet-950/40 border border-violet-800 px-1.5 py-0.5 rounded">{item.eligible}</span>
-                                <span className="text-[10px] font-mono text-indigo-300 bg-indigo-950/45 border border-indigo-900/50 px-1.5 py-0.5 rounded font-bold">✓ {item.disbursed}</span>
+                              <div key={idx} className="flex flex-col sm:flex-row sm:items-center justify-between py-2 sm:py-1 border-b border-violet-800/20 last:border-0 sm:border-0 text-violet-100 gap-2">
+                                <div className="flex justify-between sm:w-1/3">
+                                  <span className="sm:hidden text-[10px] text-violet-400 uppercase font-bold">Period</span>
+                                  <span className="font-medium text-[11px] text-left">{item.period}</span>
+                                </div>
+                                <div className="flex justify-between sm:justify-center sm:w-1/3">
+                                  <span className="sm:hidden text-[10px] text-violet-400 uppercase font-bold">Eligible</span>
+                                  <span className="font-mono font-bold text-violet-100 text-[11px] bg-violet-950/40 border border-violet-800 px-1.5 py-0.5 rounded">{item.eligible}</span>
+                                </div>
+                                <div className="flex justify-between sm:justify-end sm:w-1/3">
+                                  <span className="sm:hidden text-[10px] text-violet-400 uppercase font-bold">Status</span>
+                                  <span className="text-[10px] font-mono text-indigo-300 bg-indigo-950/45 border border-indigo-900/50 px-1.5 py-0.5 rounded font-bold">✓ {item.disbursed}</span>
+                                </div>
                               </div>
                             ))}
                           </div>
@@ -1935,14 +1945,14 @@ export default function LandingPage({ onGetStarted, onSignIn, onLaunchDemo, onSa
                             { name: "Alain Ngando", shift: "Standard Morning Shift", clockIn: "Early Entry", status: "On-Time", badgeColor: "bg-violet-950/40 text-violet-200 border border-violet-800" },
                             { name: "Sylvie Fokou", shift: "Standard Morning Shift", clockIn: "Late Entry", status: "Late Entry (Grace Period)", badgeColor: "bg-violet-950/20 text-violet-300 border border-violet-900" }
                           ].map((item, i) => (
-                            <div key={i} className="p-3 bg-violet-900/45 border border-violet-800/40 rounded flex items-center justify-between">
+                            <div key={i} className="p-3 bg-violet-900/45 border border-violet-800/40 rounded flex flex-col sm:flex-row sm:items-center justify-between gap-3 text-left sm:text-right">
                               <div>
                                 <span className="font-bold text-white block">{item.name}</span>
                                 <span className="text-[10px] text-violet-300">{item.shift}</span>
                               </div>
-                              <div className="text-right">
-                                <span className="font-mono text-violet-200 block">{item.clockIn}</span>
-                                <span className={`px-2 py-0.2 rounded-full text-[9px] font-bold ${item.badgeColor}`}>{item.status}</span>
+                              <div className="flex items-center justify-between sm:justify-end sm:flex-col gap-2 w-full sm:w-auto pt-2 sm:pt-0 border-t border-violet-800/20 sm:border-t-0 shrink-0">
+                                <span className="font-mono text-violet-200 block text-xs sm:text-right leading-none">{item.clockIn}</span>
+                                <span className={`px-2 py-0.5 rounded-full text-[9px] font-bold ${item.badgeColor} mt-0.5 inline-block`}>{item.status}</span>
                               </div>
                             </div>
                           ))}
@@ -1992,15 +2002,18 @@ export default function LandingPage({ onGetStarted, onSignIn, onLaunchDemo, onSa
                             { title: "Employment_Agreement_JN_signed.pdf", size: "Standard File", date: "Current Period" },
                             { title: "Statutory_CNPS_Declaration_Q2.pdf", size: "Standard File", date: "Current Period" }
                           ].map((doc, idx) => (
-                            <div key={idx} className="p-3 bg-violet-900/45 hover:bg-violet-900/60 rounded border border-violet-800/40 flex items-center justify-between">
-                              <div className="flex items-center gap-2.5">
-                                <FileText className="h-4.5 w-4.5 text-violet-300" />
-                                <div>
-                                  <span className="font-bold text-white block truncate max-w-[200px]">{doc.title}</span>
+                            <div key={idx} className="p-3 bg-violet-900/45 hover:bg-violet-900/60 rounded border border-violet-800/40 flex flex-col sm:flex-row sm:items-center justify-between gap-3">
+                              <div className="flex items-center gap-2.5 min-w-0">
+                                <FileText className="h-4.5 w-4.5 text-violet-300 shrink-0" />
+                                <div className="min-w-0">
+                                  <span className="font-bold text-white block truncate max-w-[180px] sm:max-w-[250px]">{doc.title}</span>
                                   <span className="text-[10px] text-violet-300">{doc.size} • Uploaded {doc.date}</span>
                                 </div>
                               </div>
-                              <span className="text-[9px] font-mono text-violet-200 bg-violet-950/40 border border-violet-800 px-2 py-0.5 rounded font-bold">VERIFIED</span>
+                              <div className="flex justify-between sm:justify-end items-center w-full sm:w-auto pt-2 sm:pt-0 border-t border-violet-800/20 sm:border-t-0 shrink-0">
+                                <span className="sm:hidden text-[10px] text-violet-400 font-bold uppercase">Status</span>
+                                <span className="text-[9px] font-mono text-violet-200 bg-violet-950/40 border border-violet-800 px-2 py-0.5 rounded font-bold">VERIFIED</span>
+                              </div>
                             </div>
                           ))}
                         </div>
@@ -2019,12 +2032,15 @@ export default function LandingPage({ onGetStarted, onSignIn, onLaunchDemo, onSa
                             { role: "Executive Owner", desc: "Full root access & multi-company settings", auth: "All nodes" },
                             { role: "HR Manager", desc: "Process monthly payroll & contract records", auth: "Payroll only" }
                           ].map((item, i) => (
-                            <div key={i} className="p-3 bg-violet-900/45 border border-violet-800/40 rounded flex items-center justify-between">
+                            <div key={i} className="p-3 bg-violet-900/45 border border-violet-800/40 rounded flex flex-col sm:flex-row sm:items-center justify-between gap-3">
                               <div>
                                 <span className="font-bold text-white block">{item.role}</span>
                                 <span className="text-[10px] text-violet-300">{item.desc}</span>
                               </div>
-                              <span className="text-[10px] bg-violet-700 text-white px-2 py-0.5 rounded-full font-bold">{item.auth}</span>
+                              <div className="flex justify-between sm:justify-end items-center w-full sm:w-auto pt-2 sm:pt-0 border-t border-violet-800/20 sm:border-t-0 shrink-0">
+                                <span className="sm:hidden text-[10px] text-violet-400 font-bold uppercase">Auth Scope</span>
+                                <span className="text-[10px] bg-violet-750 text-violet-200 border border-violet-700/40 px-2.5 py-0.5 rounded-full font-bold">{item.auth}</span>
+                              </div>
                             </div>
                           ))}
                         </div>

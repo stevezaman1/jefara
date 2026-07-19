@@ -394,10 +394,7 @@ async function testConnection() {
     await getDocFromServer(realDoc(db, 'test', 'connection'));
     console.log("Firebase Connection verified successfully.");
   } catch (error) {
-    console.warn("Firestore connection check completed. Firestore is not fully reachable. Activating local demo fallback.");
-    if (!localStorage.getItem('jefara_is_demo')) {
-      seedDemoData();
-    }
+    console.warn("Firestore connection check completed. Offline or restricted environment detected.");
   }
 }
 testConnection();
