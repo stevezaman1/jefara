@@ -673,33 +673,10 @@ export default function App() {
 
   // Monitor auth state
   useEffect(() => {
-    const isDemo = localStorage.getItem('jefara_is_demo') === 'true';
-    if (isDemo) {
-      try {
-        const storedProfile = localStorage.getItem('jefara_demo_profile');
-        const storedCompany = localStorage.getItem('jefara_demo_company');
-        if (storedProfile && storedCompany) {
-          const parsedProfile = JSON.parse(storedProfile);
-          if (parsedProfile.disabled) {
-            localStorage.setItem('jefara_login_error', "Votre compte Jefara a été désactivé par le propriétaire du nœud.");
-            localStorage.removeItem('jefara_is_demo');
-            localStorage.removeItem('jefara_demo_profile');
-            localStorage.removeItem('jefara_demo_company');
-            setProfile(null);
-            setCompany(null);
-            setLoading(false);
-            return;
-          }
-          setProfile(parsedProfile);
-          setCompany(JSON.parse(storedCompany));
-          setShowLanding(false);
-          setLoading(false);
-          return;
-        }
-      } catch (e) {
-        console.error("Error loading local demo sandbox session:", e);
-      }
-    }
+    // Clear any previous local demo sandbox session so we always start on the landing/home page
+    localStorage.removeItem('jefara_is_demo');
+    localStorage.removeItem('jefara_demo_profile');
+    localStorage.removeItem('jefara_demo_company');
 
     const unsubscribe = onAuthStateChanged(auth, async (user) => {
       if (user) {
